@@ -1,6 +1,8 @@
 package Model;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 
 public class Konzerv extends Elelmiszer {
@@ -8,7 +10,7 @@ public class Konzerv extends Elelmiszer {
     private String receptAjanlas;
 
     public Konzerv(String nev, String gyarto, LocalDate lejaratiDatum,
-                   String leiras, String receptAjanlas) throws Lejart{
+                   String leiras, String receptAjanlas) throws Lejart {
         super(nev, gyarto, lejaratiDatum);
         this.leiras = leiras;
         this.receptAjanlas = receptAjanlas;
@@ -43,12 +45,12 @@ public class Konzerv extends Elelmiszer {
     }
 
     public void receptetMutat() {
-        if (receptAjanlas != null) {
-            File receptFajl = new File(receptAjanlas);
-            if (receptFajl.exists()) {
-            }
+        if (Files.exists(Paths.get(receptAjanlas))) {
         }
+        ;
+
     }
+
 
     @Override
     public String toString() {

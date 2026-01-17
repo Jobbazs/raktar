@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 
-public abstract class Elelmiszer implements Serializable, Comparable<Elelmiszer> {
-    private String nev;
-    private String gyarto;
+public abstract class Elelmiszer implements Serializable{
+    private String nev, gyarto;
     private LocalDate lejaratiDatum;
 
-    // Konstruktor lejárati dátummal
     public Elelmiszer(String nev, String gyarto, LocalDate lejaratiDatum) throws Lejart {
         if (lejaratiDatum.isBefore(LocalDate.now()) || lejaratiDatum.isEqual(LocalDate.now())) {
             throw new Lejart();
@@ -35,9 +33,8 @@ public abstract class Elelmiszer implements Serializable, Comparable<Elelmiszer>
         return lejaratiDatum;
     }
 
-    @Override
-    public int compareTo(Elelmiszer masik) {
-        return this.nev.compareTo(masik.nev);
+    public static Comparator<Elelmiszer> nevSzerint() {
+        return Comparator.comparing(Elelmiszer::getNev);
     }
 
     public static Comparator<Elelmiszer> gyartoSzerint() {
